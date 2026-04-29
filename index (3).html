@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sumit Sitole — AI/ML Engineer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #050508;
+      --surface: #0c0c14;
+      --card: #12121c;
+      --border: rgba(255,255,255,0.07);
+      --accent: #7DF9C2;
+      --accent2: #5B8BFF;
+      --accent3: #FF6B9D;
+      --text: #E8E8F0;
+      --muted: #6B6B85;
+      --font-head: 'Syne', sans-serif;
+      --font-mono: 'DM Mono', monospace;
+      --font-serif: 'Instrument Serif', serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-head);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── AURORA BACKGROUND ─────────────────────────── */
+    .aurora-bg {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none;
+      overflow: hidden;
+    }
+    .aurora-bg::before {
+      content: '';
+      position: absolute;
+      width: 140%; height: 140%;
+      top: -20%; left: -20%;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 30%, rgba(91,139,255,0.09) 0%, transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(125,249,194,0.07) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 60% at 60% 80%, rgba(255,107,157,0.06) 0%, transparent 50%),
+        radial-gradient(ellipse 70% 30% at 10% 80%, rgba(91,139,255,0.05) 0%, transparent 60%);
+      animation: auroraShift 18s ease-in-out infinite alternate;
+    }
+    .aurora-bg::after {
+      content: '';
+      position: absolute;
+      width: 100%; height: 100%;
+      background:
+        radial-gradient(ellipse 80% 40% at 70% 60%, rgba(125,249,194,0.05) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 70% at 30% 50%, rgba(255,107,157,0.04) 0%, transparent 50%);
+      animation: auroraShift2 22s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0%   { transform: translate(0, 0) scale(1); }
+      33%  { transform: translate(3%, 2%) scale(1.02); }
+      66%  { transform: translate(-2%, 3%) scale(0.98); }
+      100% { transform: translate(2%, -2%) scale(1.03); }
+    }
+    @keyframes auroraShift2 {
+      0%   { transform: translate(0, 0) scale(1); }
+      50%  { transform: translate(-3%, 2%) scale(1.04); }
+      100% { transform: translate(2%, -3%) scale(0.97); }
+    }
+
+    /* NOISE OVERLAY */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 1; opacity: 0.5;
+    }
+
+    /* CUSTOM CURSOR */
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9999;
+      transition: transform 0.15s ease;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      width: 36px; height: 36px;
+      border: 1.5px solid var(--accent);
+      border-radius: 50%;
+      position: fixed; top: 0; left: 0;
+      pointer-events: none; z-index: 9998;
+      opacity: 0.5;
+      transition: transform 0.35s ease, width 0.3s, height 0.3s, opacity 0.3s;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 4rem;
+      backdrop-filter: blur(24px);
+      border-bottom: 1px solid var(--border);
+      background: rgba(5,5,8,0.75);
+    }
+    .nav-logo {
+      display: flex; flex-direction: column; line-height: 1;
+    }
+    .nav-logo-main {
+      font-size: 1rem; font-weight: 800; letter-spacing: 0.12em;
+      color: var(--accent); text-transform: uppercase;
+      font-family: var(--font-mono);
+    }
+    .nav-logo-sub {
+      font-size: 0.62rem; font-weight: 400; letter-spacing: 0.18em;
+      color: var(--muted); text-transform: uppercase;
+      font-family: var(--font-mono);
+      margin-top: 1px;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase;
+      font-family: var(--font-mono);
+      transition: color 0.25s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: center;
+      padding: 0 4rem; overflow: hidden;
+      z-index: 2;
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(125,249,194,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(125,249,194,0.035) 1px, transparent 1px);
+      background-size: 60px 60px;
+      mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+    }
+    .hero-glow {
+      position: absolute; width: 800px; height: 800px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(91,139,255,0.14) 0%, transparent 70%);
+      top: -150px; right: -250px; pointer-events: none;
+      animation: glowPulse 6s ease-in-out infinite;
+    }
+    .hero-glow2 {
+      position: absolute; width: 500px; height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(125,249,194,0.09) 0%, transparent 70%);
+      bottom: 50px; left: -150px; pointer-events: none;
+      animation: glowPulse 8s ease-in-out infinite reverse;
+    }
+    @keyframes glowPulse {
+      0%, 100% { opacity: 0.7; transform: scale(1); }
+      50% { opacity: 1; transform: scale(1.05); }
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 820px; }
+    .hero-tag {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--font-mono); font-size: 0.78rem;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .hero-tag::before {
+      content: ''; width: 30px; height: 1px; background: var(--accent);
+    }
+
+    /* ─── NAME: SAME STYLE FOR BOTH LINES ──────────── */
+    h1.hero-title {
+      font-size: clamp(3.5rem, 8vw, 7rem);
+      font-weight: 800; line-height: 0.95;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+    h1.hero-title .line1,
+    h1.hero-title .line2 {
+      font-family: var(--font-head);
+      font-weight: 800;
+      font-style: normal;
+      color: var(--text);
+      display: block;
+    }
+    h1.hero-title .line2 {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ─── TYPEWRITER ────────────────────────────────── */
+    .typewriter-wrap {
+      font-family: var(--font-mono); font-size: 1rem; font-weight: 300;
+      color: var(--muted); margin-bottom: 2.5rem;
+      display: flex; align-items: center; gap: 0.5rem;
+      min-height: 1.6em;
+    }
+    .typewriter-prefix { color: var(--accent2); }
+    .typewriter-text {
+      color: var(--text); font-weight: 500;
+      border-right: 2px solid var(--accent);
+      padding-right: 4px;
+      animation: blink 0.75s step-end infinite;
+    }
+    @keyframes blink {
+      0%, 100% { border-color: var(--accent); }
+      50% { border-color: transparent; }
+    }
+
+    .hero-desc {
+      font-size: 0.95rem; color: var(--muted); line-height: 1.8;
+      max-width: 520px; margin-bottom: 2.5rem;
+      font-family: var(--font-mono); font-weight: 300;
+    }
+    .hero-ctas { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      padding: 0.85rem 2rem;
+      background: var(--accent); color: #050508;
+      border: none; border-radius: 4px;
+      font-family: var(--font-head); font-weight: 700; font-size: 0.85rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; cursor: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(125,249,194,0.35);
+    }
+    .btn-ghost {
+      padding: 0.85rem 2rem;
+      background: transparent; color: var(--text);
+      border: 1px solid var(--border); border-radius: 4px;
+      font-family: var(--font-head); font-weight: 600; font-size: 0.85rem;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      text-decoration: none; cursor: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+
+    .hero-stats {
+      position: absolute; right: 4rem; bottom: 4rem;
+      display: flex; flex-direction: column; gap: 1.5rem; align-items: flex-end;
+    }
+    .stat { text-align: right; }
+    .stat-num {
+      font-size: 2.2rem; font-weight: 800; color: var(--text);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--muted); letter-spacing: 0.12em; text-transform: uppercase;
+    }
+
+    /* SCROLL LINE */
+    .scroll-line {
+      position: absolute; left: 4rem; bottom: 4rem;
+      display: flex; flex-direction: column; align-items: center; gap: 0.75rem;
+    }
+    .scroll-line span {
+      font-family: var(--font-mono); font-size: 0.68rem;
+      color: var(--muted); letter-spacing: 0.2em;
+      text-transform: uppercase; writing-mode: vertical-rl;
+    }
+    .scroll-line::after {
+      content: ''; width: 1px; height: 60px;
+      background: linear-gradient(var(--accent), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.3); }
+    }
+
+    /* SECTIONS */
+    section { padding: 8rem 4rem; position: relative; z-index: 2; }
+    .section-label {
+      font-family: var(--font-mono); font-size: 0.75rem;
+      color: var(--accent); letter-spacing: 0.2em; text-transform: uppercase;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::after {
+      content: ''; flex: 1; max-width: 60px; height: 1px; background: var(--accent);
+    }
+    h2.section-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800; letter-spacing: -0.02em; margin-bottom: 4rem;
+    }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+    }
+    .about-text p {
+      font-family: var(--font-mono); font-size: 0.95rem;
+      color: var(--muted); line-height: 1.9; margin-bottom: 1.2rem; font-weight: 300;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+    .about-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 2rem;
+    }
+    .about-card-title {
+      font-family: var(--font-mono); font-size: 0.7rem;
+      color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+    .info-row {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 0.75rem 0; border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key { font-family: var(--font-mono); font-size: 0.78rem; color: var(--muted); }
+    .info-val { font-family: var(--font-mono); font-size: 0.78rem; color: var(--text); font-weight: 500; }
+    .info-val a { color: var(--text); text-decoration: none; transition: color 0.2s; }
+    .info-val a:hover { color: var(--accent); }
+
+    /* SKILLS */
+    .skills-wrapper {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem;
+    }
+    .skill-group {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 12px; padding: 1.75rem;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .skill-group:hover {
+      border-color: rgba(125,249,194,0.3);
+      transform: translateY(-4px);
+    }
+    .skill-group-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; margin-bottom: 1rem;
+    }
+    .skill-group-title {
+      font-size: 0.9rem; font-weight: 700; margin-bottom: 1rem;
+      letter-spacing: 0.05em;
+    }
+    .skill-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+    .skill-tag {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      padding: 0.3rem 0.75rem; border-radius: 100px;
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--muted); transition: all 0.2s;
+    }
+    .skill-tag:hover { background: rgba(125,249,194,0.08); color: var(--accent); border-color: rgba(125,249,194,0.3); }
+
+    /* ─── PROJECTS ───────────────────────────────────── */
+    .projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+    .project-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 2rem; position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: none;
+    }
+    .project-card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0; height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s ease;
+    }
+    .project-card:hover::before { transform: scaleX(1); }
+    .project-card:hover { border-color: rgba(125,249,194,0.2); transform: translateY(-6px); }
+    .project-num {
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--muted); margin-bottom: 1rem;
+      letter-spacing: 0.1em;
+    }
+    .project-title {
+      font-size: 1.35rem; font-weight: 800; margin-bottom: 0.75rem;
+      letter-spacing: -0.01em;
+    }
+    .project-desc {
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--muted); line-height: 1.7; margin-bottom: 1.25rem; font-weight: 300;
+    }
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
+    .tech-chip {
+      font-family: var(--font-mono); font-size: 0.68rem;
+      padding: 0.25rem 0.65rem; border-radius: 4px;
+      background: rgba(91,139,255,0.1); border: 1px solid rgba(91,139,255,0.2);
+      color: var(--accent2);
+    }
+    /* Project action buttons */
+    .project-actions { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+    .proj-btn {
+      display: inline-flex; align-items: center; gap: 0.4rem;
+      font-family: var(--font-mono); font-size: 0.72rem;
+      padding: 0.4rem 0.9rem; border-radius: 6px;
+      text-decoration: none; cursor: none;
+      transition: all 0.2s; font-weight: 500;
+    }
+    .proj-btn-github {
+      background: rgba(255,255,255,0.05); border: 1px solid var(--border);
+      color: var(--muted);
+    }
+    .proj-btn-github:hover { border-color: var(--accent); color: var(--accent); background: rgba(125,249,194,0.06); }
+    .proj-btn-live {
+      background: rgba(125,249,194,0.1); border: 1px solid rgba(125,249,194,0.25);
+      color: var(--accent);
+    }
+    .proj-btn-live:hover { background: rgba(125,249,194,0.18); box-shadow: 0 0 16px rgba(125,249,194,0.2); }
+    .project-arrow {
+      position: absolute; top: 1.75rem; right: 1.75rem;
+      width: 32px; height: 32px; border-radius: 50%;
+      border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.8rem; color: var(--muted);
+      transition: all 0.25s;
+    }
+    .project-card:hover .project-arrow {
+      background: var(--accent); border-color: var(--accent);
+      color: #050508; transform: rotate(45deg);
+    }
+
+    /* EXPERIENCE */
+    .exp-container { max-width: 720px; }
+    .exp-item {
+      display: grid; grid-template-columns: 140px 1fr;
+      gap: 2rem; padding: 2.5rem 0; border-bottom: 1px solid var(--border);
+      position: relative;
+    }
+    .exp-item::before {
+      content: ''; position: absolute;
+      left: 136px; top: 2.5rem; bottom: 0;
+      width: 1px; background: var(--border);
+    }
+    .exp-date { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); padding-top: 0.2rem; }
+    .exp-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--accent); position: absolute;
+      left: 131px; top: calc(2.5rem + 0.2rem);
+      box-shadow: 0 0 12px var(--accent);
+    }
+    .exp-role { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.25rem; }
+    .exp-company { font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent2); margin-bottom: 1rem; }
+    .exp-bullets { list-style: none; }
+    .exp-bullets li {
+      font-family: var(--font-mono); font-size: 0.82rem;
+      color: var(--muted); line-height: 1.7; font-weight: 300;
+      padding-left: 1rem; position: relative; margin-bottom: 0.5rem;
+    }
+    .exp-bullets li::before {
+      content: '→'; position: absolute; left: 0; color: var(--accent); font-size: 0.72rem;
+    }
+
+    /* COURSEWORK */
+    .courses-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+    }
+    .course-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 1.25rem;
+      transition: border-color 0.3s, transform 0.3s;
+      text-align: center;
+    }
+    .course-card:hover {
+      border-color: rgba(125,249,194,0.25);
+      transform: translateY(-3px);
+    }
+    .course-icon { font-size: 1.6rem; margin-bottom: 0.75rem; }
+    .course-name {
+      font-size: 0.8rem; font-weight: 700;
+      letter-spacing: 0.03em; line-height: 1.3;
+    }
+
+    /* CERTIFICATIONS */
+    .cert-row {
+      display: flex; align-items: center; gap: 1.5rem;
+      padding: 1.25rem 1.5rem; background: var(--card);
+      border: 1px solid var(--border); border-radius: 10px;
+      margin-bottom: 0.75rem; transition: border-color 0.25s;
+    }
+    .cert-row:hover { border-color: rgba(125,249,194,0.25); }
+    .cert-icon {
+      width: 40px; height: 40px; border-radius: 8px;
+      background: rgba(125,249,194,0.08);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem; flex-shrink: 0;
+    }
+    .cert-name { font-weight: 700; font-size: 0.9rem; }
+    .cert-issuer { font-family: var(--font-mono); font-size: 0.75rem; color: var(--muted); }
+
+    /* CONTACT */
+    .contact-section {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      text-align: center;
+    }
+    .contact-section h2 { margin-bottom: 1rem; }
+    .contact-sub {
+      font-family: var(--font-mono); font-size: 0.9rem;
+      color: var(--muted); margin-bottom: 3rem; font-weight: 300;
+    }
+    .contact-links { display: flex; justify-content: center; gap: 1.5rem; flex-wrap: wrap; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.85rem 1.75rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 8px; text-decoration: none;
+      color: var(--text); font-family: var(--font-mono); font-size: 0.82rem;
+      transition: all 0.25s; cursor: none;
+    }
+    .contact-link:hover {
+      border-color: var(--accent); color: var(--accent);
+      transform: translateY(-2px);
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 4rem; text-align: center;
+      font-family: var(--font-mono); font-size: 0.72rem;
+      color: var(--muted); border-top: 1px solid var(--border);
+      position: relative; z-index: 2;
+    }
+
+    /* ANIMATIONS */
+    .fade-up {
+      opacity: 0; transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero-tag { animation: heroFadeIn 0.8s ease 0.1s both; }
+    .hero-title { animation: heroFadeIn 0.8s ease 0.25s both; }
+    .typewriter-wrap { animation: heroFadeIn 0.8s ease 0.4s both; }
+    .hero-desc { animation: heroFadeIn 0.8s ease 0.5s both; }
+    .hero-ctas { animation: heroFadeIn 0.8s ease 0.65s both; }
+    .hero-stats { animation: heroFadeIn 0.8s ease 0.8s both; }
+    .scroll-line { animation: heroFadeIn 0.8s ease 1s both; }
+
+    /* ACHIEVEMENT BADGES */
+    .achievements { display: flex; flex-direction: column; gap: 0.75rem; }
+    .badge {
+      display: flex; align-items: flex-start; gap: 1rem;
+      padding: 1.25rem 1.5rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; transition: border-color 0.25s;
+    }
+    .badge:hover { border-color: rgba(255,107,157,0.3); }
+    .badge-icon { font-size: 1.3rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .badge-text { font-family: var(--font-mono); font-size: 0.82rem; color: var(--muted); line-height: 1.6; font-weight: 300; }
+    .badge-text strong { color: var(--text); }
+
+    /* ─── HOW TO EDIT GUIDE (visible inline in code) ─ */
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-links { display: none; }
+      section { padding: 5rem 1.5rem; }
+      .hero { padding: 0 1.5rem; }
+      .hero-stats { display: none; }
+      .scroll-line { display: none; }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .skills-wrapper { grid-template-columns: 1fr 1fr; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .courses-grid { grid-template-columns: repeat(2,1fr); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- AURORA BACKGROUND -->
+<div class="aurora-bg"></div>
+
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <span class="nav-logo-main">SS.dev</span>
+    <span class="nav-logo-sub">Portfolio</span>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-glow2"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Available for Internships & Collaborations</div>
+
+    <!-- ══ NAME: both same Syne 800 style, line2 gets gradient ══ -->
+    <h1 class="hero-title">
+      <span class="line1">Sumit</span>
+      <span class="line2">Sitole.</span>
+    </h1>
+
+    <!-- ══ TYPEWRITER LOOP ══ -->
+    <div class="typewriter-wrap">
+      <span class="typewriter-prefix">// &nbsp;</span>
+      <span class="typewriter-text" id="typewriterEl"></span>
+    </div>
+
+    <p class="hero-desc">
+      AI/ML Engineering student building intelligent systems,<br/>
+      exploring data-driven decisions &amp; crafting smart software.
+    </p>
+    <div class="hero-ctas">
+      <a href="#projects" class="btn-primary">View Projects ↓</a>
+      <!-- ══ EDIT: Change mailto if you want another email on the button ══ -->
+      <a href="mailto:sumitsitole99@gmail.com" class="btn-ghost">Hire Me</a>
+    </div>
+  </div>
+  <div class="hero-stats">
+    <div class="stat">
+      <div class="stat-num">3+</div>
+      <div class="stat-label">Projects Built</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">7.62</div>
+      <div class="stat-label">Current SGPA</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2nd</div>
+      <div class="stat-label">Year, AI/ML</div>
+    </div>
+  </div>
+  <div class="scroll-line"><span>Scroll</span></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-label">01 — About</div>
+  <h2 class="section-title">Who I Am</h2>
+  <div class="about-grid fade-up">
+    <div class="about-text">
+      <p>I'm <strong>Sumit Sitole</strong>, a 2nd-year <strong>AI/ML Engineering student</strong> at Sage University, Indore. I'm passionate about building intelligent systems that solve real-world problems through data, algorithms, and thoughtful design.</p>
+      <p>My experience as a <strong>Business Analyst Trainee at Encode AI</strong> gave me hands-on exposure to EDA, data storytelling, and cross-functional collaboration — transforming raw data into actionable insights.</p>
+      <p>I believe in <strong>learning by building</strong>. From rule-based chatbots to turn-based strategy games, every project I ship teaches me something new about Python, logic design, and user experience.</p>
+      <p>Currently seeking <strong>internships, projects, and research opportunities</strong> in AI/ML, Data Science, and Backend Development.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-card-title">// quick.info</div>
+      <div class="info-row">
+        <span class="info-key">Name</span>
+        <span class="info-val">Sumit Sitole</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Location</span>
+        <span class="info-val">Indore, MP 🇮🇳</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Degree</span>
+        <span class="info-val">B.Tech AI/ML</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Year</span>
+        <span class="info-val">2nd Year (2024–2028)</span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">SGPA</span>
+        <span class="info-val">7.62 / 10</span>
+      </div>
+      <!-- ══ EMAIL 1 ══ -->
+      <div class="info-row">
+        <span class="info-key">Email 1</span>
+        <span class="info-val"><a href="mailto:sumitsitole99@gmail.com">sumitsitole99@gmail.com</a></span>
+      </div>
+      <!-- ══ EMAIL 2 — NEWLY ADDED ══ -->
+      <div class="info-row">
+        <span class="info-key">Email 2</span>
+        <span class="info-val"><a href="mailto:sumitsitole11@gmail.com">sumitsitole11@gmail.com</a></span>
+      </div>
+      <div class="info-row">
+        <span class="info-key">Status</span>
+        <span class="info-val" style="color: var(--accent);">● Open to Work</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-label">02 — Skills</div>
+  <h2 class="section-title">Technical Stack</h2>
+  <div class="skills-wrapper fade-up">
+    <div class="skill-group">
+      <div class="skill-group-icon" style="background: rgba(125,249,194,0.1);">🐍</div>
+      <div class="skill-group-title">Languages</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Python</span>
+        <span class="skill-tag">SQL</span>
+        <span class="skill-tag">HTML5</span>
+        <span class="skill-tag">CSS3</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon" style="background: rgba(91,139,255,0.1);">📦</div>
+      <div class="skill-group-title">Python Libraries</div>
+      <div class="skill-tags">
+        <span class="skill-tag">NumPy</span>
+        <span class="skill-tag">Pandas</span>
+        <span class="skill-tag">Matplotlib</span>
+        <span class="skill-tag">Scikit-learn</span>
+        <span class="skill-tag">Seaborn</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon" style="background: rgba(255,107,157,0.1);">🤖</div>
+      <div class="skill-group-title">AI / ML</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Machine Learning</span>
+        <span class="skill-tag">NLP</span>
+        <span class="skill-tag">Deep Learning</span>
+        <span class="skill-tag">EDA</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon" style="background: rgba(125,249,194,0.08);">🗄️</div>
+      <div class="skill-group-title">Databases & Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">MySQL</span>
+        <span class="skill-tag">SQLite</span>
+        <span class="skill-tag">Excel</span>
+        <span class="skill-tag">Google Colab</span>
+        <span class="skill-tag">Jupyter</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon" style="background: rgba(91,139,255,0.08);">🛠️</div>
+      <div class="skill-group-title">Dev Tools</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Git</span>
+        <span class="skill-tag">GitHub</span>
+        <span class="skill-tag">VS Code</span>
+        <span class="skill-tag">PyCharm</span>
+      </div>
+    </div>
+    <div class="skill-group">
+      <div class="skill-group-icon" style="background: rgba(255,107,157,0.08);">💡</div>
+      <div class="skill-group-title">Soft Skills</div>
+      <div class="skill-tags">
+        <span class="skill-tag">Team Leadership</span>
+        <span class="skill-tag">Problem Solving</span>
+        <span class="skill-tag">Peer Mentoring</span>
+        <span class="skill-tag">Communication</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════
+     PROJECTS SECTION
+     ═══════════════
+     HOW TO ADD / EDIT A PROJECT:
+     1. Copy one <div class="project-card"> block below
+     2. Change project-num, project-title, project-desc
+     3. Add/remove <span class="tech-chip"> inside project-tech
+     4. In project-actions:
+        - Set href on proj-btn-github to your GitHub repo URL
+        - Set href on proj-btn-live to your live demo URL (or remove if none)
+     ═══════════════════════════════════════════════════════════ -->
+<section id="projects">
+  <div class="section-label">03 — Projects</div>
+  <h2 class="section-title">Things I've Built</h2>
+  <div class="projects-grid fade-up">
+
+    <!-- ══ PROJECT 1 — Edit below ══ -->
+    <div class="project-card">
+      <div class="project-num">01 / NOV – DEC</div>
+      <div class="project-arrow">↗</div>
+      <div class="project-title">DiceQuest Arena</div>
+      <p class="project-desc">A Python-based turn-based strategy board game inspired by Ludo. Features complete dice logic, multi-player turn system, win detection, and smooth game-state management — demonstrating strong OOP fundamentals and logic design.</p>
+      <div class="project-tech">
+        <span class="tech-chip">Python</span>
+        <span class="tech-chip">OOP</span>
+        <span class="tech-chip">Game Logic</span>
+        <span class="tech-chip">DSA</span>
+      </div>
+      <div class="project-actions">
+        <!-- Replace # with your actual GitHub repo link -->
+        <a href="#" class="proj-btn proj-btn-github">⌥ GitHub</a>
+        <!-- Remove the live button if no demo; replace # with demo URL -->
+        <a href="#" class="proj-btn proj-btn-live">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <!-- ══ PROJECT 2 — Edit below ══ -->
+    <div class="project-card">
+      <div class="project-num">02 / DEC – JAN</div>
+      <div class="project-arrow">↗</div>
+      <div class="project-title">HandClash: RPS Intelligence</div>
+      <p class="project-desc">An interactive Rock–Paper–Scissors game featuring intelligent decision logic, real-time result evaluation, and win/loss tracking. Demonstrates conditional AI logic, user input handling, and clean program flow design.</p>
+      <div class="project-tech">
+        <span class="tech-chip">Python</span>
+        <span class="tech-chip">AI Logic</span>
+        <span class="tech-chip">Random Module</span>
+        <span class="tech-chip">CLI</span>
+      </div>
+      <div class="project-actions">
+        <a href="#" class="proj-btn proj-btn-github">⌥ GitHub</a>
+        <a href="#" class="proj-btn proj-btn-live">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <!-- ══ PROJECT 3 — Edit below ══ -->
+    <div class="project-card">
+      <div class="project-num">03 / JAN – FEB</div>
+      <div class="project-arrow">↗</div>
+      <div class="project-title">PyTalk Bot</div>
+      <p class="project-desc">A rule-driven conversational chatbot built in Python using conditional logic and string processing. Handles basic user interactions intelligently and demonstrates foundational NLP concepts like intent detection and pattern matching.</p>
+      <div class="project-tech">
+        <span class="tech-chip">Python</span>
+        <span class="tech-chip">NLP Concepts</span>
+        <span class="tech-chip">String Processing</span>
+        <span class="tech-chip">Rule Engine</span>
+      </div>
+      <div class="project-actions">
+        <a href="#" class="proj-btn proj-btn-github">⌥ GitHub</a>
+        <a href="#" class="proj-btn proj-btn-live">↗ Live Demo</a>
+      </div>
+    </div>
+
+    <!-- ══ PROJECT 4 (UPCOMING) ══ -->
+    <div class="project-card" style="border-style: dashed; opacity: 0.6;">
+      <div class="project-num">04 / UPCOMING</div>
+      <div class="project-title">Next Project</div>
+      <p class="project-desc">Always building something new. Currently exploring ML model deployment, data dashboards, and real-world AI applications. Stay tuned on GitHub.</p>
+      <div class="project-tech">
+        <span class="tech-chip">Coming Soon</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- EXPERIENCE -->
+<section id="experience" style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-label">04 — Experience</div>
+  <h2 class="section-title">Work Experience</h2>
+  <div class="exp-container fade-up">
+    <div class="exp-item">
+      <div class="exp-date">2024 – 2025</div>
+      <div>
+        <div class="exp-dot"></div>
+        <div class="exp-role">Business Analyst Trainee</div>
+        <div class="exp-company">Encode AI · Indore, MP</div>
+        <ul class="exp-bullets">
+          <li>Performed Exploratory Data Analysis (EDA) on real-world datasets to uncover trends, patterns, and key business insights for data-driven decision-making.</li>
+          <li>Collaborated with senior analysts to gather requirements, clean messy data, and build analytical reports using Python, SQL, and visualization tools.</li>
+          <li>Supported development of analytical dashboards and presented actionable insights to cross-functional teams, contributing to process improvement.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-date">Ongoing</div>
+      <div>
+        <div class="exp-dot" style="background: var(--accent2); box-shadow: 0 0 12px var(--accent2);"></div>
+        <div class="exp-role">AI/ML Engineering Student</div>
+        <div class="exp-company">Sage University · Indore, MP</div>
+        <ul class="exp-bullets">
+          <li>Pursuing B.Tech in Artificial Intelligence & Machine Learning with SGPA 7.62/10.</li>
+          <li>Leading academic mini-project teams as Team Lead; volunteering in technical academic events.</li>
+          <li>Serving as Peer Mentor for Python Programming Basics, helping juniors with fundamentals.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COURSEWORK -->
+<section id="coursework">
+  <div class="section-label">05 — Education</div>
+  <h2 class="section-title">Relevant Coursework</h2>
+  <div class="courses-grid fade-up">
+    <div class="course-card"><div class="course-icon">🤖</div><div class="course-name">Artificial Intelligence</div></div>
+    <div class="course-card"><div class="course-icon">📈</div><div class="course-name">Machine Learning</div></div>
+    <div class="course-card"><div class="course-icon">🐍</div><div class="course-name">Python Programming</div></div>
+    <div class="course-card"><div class="course-icon">🧠</div><div class="course-name">Natural Language Processing</div></div>
+    <div class="course-card"><div class="course-icon">🔗</div><div class="course-name">Deep Learning</div></div>
+    <div class="course-card"><div class="course-icon">🗂️</div><div class="course-name">Data Structures & Algorithms</div></div>
+    <div class="course-card"><div class="course-icon">🗄️</div><div class="course-name">RDBMS / SQL</div></div>
+    <div class="course-card"><div class="course-icon">📐</div><div class="course-name">Linear Algebra</div></div>
+    <div class="course-card"><div class="course-icon">🏗️</div><div class="course-name">Object-Oriented Programming</div></div>
+    <div class="course-card"><div class="course-icon">📊</div><div class="course-name">Statistics & Probability</div></div>
+    <div class="course-card"><div class="course-icon">☁️</div><div class="course-name">Cloud Computing Basics</div></div>
+    <div class="course-card"><div class="course-icon">🕸️</div><div class="course-name">Computer Networks</div></div>
+  </div>
+</section>
+
+<!-- ACHIEVEMENTS + CERTIFICATIONS -->
+<section style="background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);">
+  <div class="section-label">06 — Achievements</div>
+  <h2 class="section-title">Wins & Recognition</h2>
+  <div class="about-grid fade-up">
+    <div class="achievements">
+      <div class="badge">
+        <div class="badge-icon">🏆</div>
+        <div class="badge-text"><strong>Multiple Python Projects</strong><br/>Built a Ludo-style board game & AI chatbot from scratch using core Python — no frameworks.</div>
+      </div>
+      <div class="badge">
+        <div class="badge-icon">🧩</div>
+        <div class="badge-text"><strong>Real-World Problem Solving</strong><br/>Applied Python fundamentals to solve logical and data-driven challenges in professional settings.</div>
+      </div>
+      <div class="badge">
+        <div class="badge-icon">👥</div>
+        <div class="badge-text"><strong>Team Leader — Academic Projects</strong><br/>Led teams in building and presenting mini-projects, coordinating tasks and deliverables.</div>
+      </div>
+      <div class="badge">
+        <div class="badge-icon">🎤</div>
+        <div class="badge-text"><strong>Technical Volunteer & Peer Mentor</strong><br/>Volunteered in academic tech events and mentored peers in Python Programming Basics.</div>
+      </div>
+    </div>
+    <div>
+      <div class="about-card-title" style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--accent); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.25rem;">// certifications</div>
+      <!-- ══ EDIT: Replace with your real certifications ══ -->
+      <div class="cert-row">
+        <div class="cert-icon">📜</div>
+        <div>
+          <div class="cert-name">Add Your Certification Here</div>
+          <div class="cert-issuer">Issuer · Year</div>
+        </div>
+      </div>
+      <div class="cert-row">
+        <div class="cert-icon">🏅</div>
+        <div>
+          <div class="cert-name">Add Your Certification Here</div>
+          <div class="cert-issuer">Issuer · Year</div>
+        </div>
+      </div>
+      <div class="cert-row" style="border: 1px dashed rgba(255,255,255,0.1); opacity: 0.5;">
+        <div class="cert-icon">➕</div>
+        <div>
+          <div class="cert-name">More Coming Soon</div>
+          <div class="cert-issuer">Actively upskilling</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact-section" id="contact">
+  <div class="section-label" style="justify-content: center;">07 — Contact</div>
+  <h2 class="section-title">Let's Build Together</h2>
+  <p class="contact-sub">Open to internships, research collaborations, and freelance projects.<br/>Don't hesitate to reach out — I respond fast.</p>
+  <div class="contact-links fade-up">
+    <!-- ══ EMAIL 1 ══ -->
+    <a href="mailto:sumitsitole99@gmail.com" class="contact-link">
+      <span>📧</span> sumitsitole99@gmail.com
+    </a>
+    <!-- ══ EMAIL 2 — NEWLY ADDED ══ -->
+    <a href="mailto:sumitsitole11@gmail.com" class="contact-link">
+      <span>📧</span> sumitsitole11@gmail.com
+    </a>
+    <a href="tel:+917723949824" class="contact-link">
+      <span>📱</span> +91-7723949824
+    </a>
+    <a href="https://linkedin.com/in/yourprofile" target="_blank" class="contact-link">
+      <span>💼</span> LinkedIn
+    </a>
+    <a href="https://github.com/" target="_blank" class="contact-link">
+      <span>🐙</span> GitHub
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Designed & built by Sumit Sitole · 2025 · AI/ML Engineer in the Making 🚀</p>
+</footer>
+
+<script>
+  // ─── CUSTOM CURSOR ──────────────────────────────────────────
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  function animCursor() {
+    cursor.style.transform = `translate(${mx - 5}px, ${my - 5}px)`;
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animCursor);
+  }
+  animCursor();
+
+  // ─── FADE UP OBSERVER ───────────────────────────────────────
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // ─── TYPEWRITER LOOP ────────────────────────────────────────
+  // ✏️ EDIT: Add or remove lines from this array to change the loop
+  const phrases = [
+    "I am Sumit Sitole",
+    "AI/ML Engineer",
+    "Data Science Enthusiast",
+    "Python Developer",
+    "Problem Solver",
+    "Building the Future with AI"
+  ];
+
+  const el = document.getElementById('typewriterEl');
+  let pi = 0, ci = 0, deleting = false, paused = false;
+
+  function typeStep() {
+    const current = phrases[pi];
+    if (paused) { paused = false; setTimeout(typeStep, 1600); return; }
+
+    if (!deleting) {
+      el.textContent = current.slice(0, ci + 1);
+      ci++;
+      if (ci === current.length) { deleting = true; paused = true; setTimeout(typeStep, 100); return; }
+      setTimeout(typeStep, 65);
+    } else {
+      el.textContent = current.slice(0, ci - 1);
+      ci--;
+      if (ci === 0) {
+        deleting = false;
+        pi = (pi + 1) % phrases.length;
+        setTimeout(typeStep, 400);
+        return;
+      }
+      setTimeout(typeStep, 35);
+    }
+  }
+
+  // Start after hero animation delay
+  setTimeout(typeStep, 900);
+</script>
+</body>
+</html>
